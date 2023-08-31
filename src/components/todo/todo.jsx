@@ -3,7 +3,10 @@ import useForm from '../../hooks/form.jsx';
 
 import { v4 as uuid } from 'uuid';
 
+import { SettingsContext } from '../../Context/settings.jsx';
+
 const ToDo = () => {
+  // const settings = useContext(SettingsContext);
 
   const [defaultValues] = useState({
     difficulty: 4,
