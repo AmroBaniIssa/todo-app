@@ -4,7 +4,13 @@ export const AddToListContext = React.createContext();
 
 export default function AddList(props) {
     const [list, setlist] = useState([]);
-  const [completed, setIncompleted] = useState([]);
+    const [completed, setIncompleted] = useState([]);
+    const state = {
+      list: list,
+      completed: completed,
+      updateList,
+      updatecompleted,
+    };
 
   const updateList = (newItem) => {
     setlist((prevList) => [...prevList, newItem]);
@@ -17,12 +23,6 @@ export default function AddList(props) {
 
   };
 
-  const state = {
-    list: list,
-    completed: completed,
-    updateList,
-    updatecompleted,
-  };
 
   return (
     <AddToListContext.Provider value={state}>
