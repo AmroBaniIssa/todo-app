@@ -6,19 +6,19 @@ export default function Settings(props) {
   const [numberOfItems, setNumberOfItems] = useState("3");
   const [completed, setcompleted] = useState(true);
 
-  const state = {
-    numberOfItems,
-    completed,
-    updateNumberOfItems,
-    updateCompleted,
-  };
   const updateNumberOfItems = (newNumberOfItems) => {
-    setNumberOfItems(newNumberOfItems);
-  };
-
-  const updateCompleted = (newCompleted) => {
-    setcompleted(newCompleted);
-  };
+      setNumberOfItems(newNumberOfItems);
+    };
+    
+    const updateCompleted = (newCompleted) => {
+        setcompleted(newCompleted);
+    };
+    const state = {
+      numberOfItems,
+      completed,
+      updateNumberOfItems,
+      updateCompleted,
+    };
 
 
 //   console.log(numberOfItems);
