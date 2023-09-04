@@ -12,7 +12,7 @@ export default function Header(props) {
                 {/* <Navbar.Heading>Title from Context {this.context.title}</Navbar.Heading> */}
                 <Navbar.Divider />
                 <Navbar.Heading>
-                    Mode from context : {myContext.mode}
+                    change mode 
                     <Button icon="refresh" onClick={myContext.toggleMode} />
                 </Navbar.Heading>
             </Navbar.Group>
