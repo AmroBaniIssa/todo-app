@@ -13,7 +13,7 @@ const ToDo = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    Additem.updateList({
+    Additem.addOneincompleted({
       id: uuid(),
       addToDoItem: e.target.addToDoItem.value,
       difficulty: e.target.difficulty.value,
@@ -27,9 +27,7 @@ const ToDo = () => {
     <>
       <SettingPage />
       <Header />
-      <header>
-        <h1>To Do List items pending</h1>
-      </header>
+      
       <form onSubmit={handleSubmit}>
         <h2>Add To Do Item</h2>
 

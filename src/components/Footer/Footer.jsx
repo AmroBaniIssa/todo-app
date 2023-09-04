@@ -12,7 +12,7 @@ export default function Footer(props) {
         <>
             <Card elevation={Elevation.TWO} className={theme.mode}>
                 <h3>the mode is {theme.mode}</h3>
-                <h5> {setting.completed ? "completed items are shown" : "completed items are hidden"}</h5>
+                <h5> {setting.completed ?  "completed items are hidden" :  "completed items are shown"}</h5>
                 
             </Card>
         </>
