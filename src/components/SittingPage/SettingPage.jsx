@@ -38,11 +38,12 @@ export default function SettingPage(props) {
           <p>{isOn ? "ON" : "OFF"}</p>
         </div>
         <label htmlFor="myInput">Number of items per page</label>
-        <input type="number" name="myNumber" />
+        <input type="number" name="myNumber"  />
 
         <input type="submit" />
       </form>
       <h2>Current Mode: {theme.mode}</h2>
+      
     </>
   );
 }
