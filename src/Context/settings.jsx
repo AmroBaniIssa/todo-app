@@ -4,7 +4,7 @@ export const SettingsContext = React.createContext();
 
 export default function Settings(props) {
   const [numberOfItems, setNumberOfItems] = useState("3");
-  const [completed, setcompleted] = useState(true);
+  const [completed, setcompleted] = useState(false);
 
   const updateNumberOfItems = (newNumberOfItems) => {
       setNumberOfItems(newNumberOfItems);

@@ -7,6 +7,7 @@ import { AddToListContext } from "../../Context/addToList.jsx";
 import Footer from "../Footer/Footer.jsx";
 import Header from "../Header/Header.jsx";
 import SettingPage from "../SittingPage/SettingPage.jsx";
+import Pagination from "../List/list.jsx";
 const ToDo = () => {
   const Additem = useContext(AddToListContext);
   const handleSubmit = (e) => {
@@ -19,45 +20,8 @@ const ToDo = () => {
       assignedTo: e.target.assignedTo.value,
       completed: false,
     });
-
-    // console.log(Additem.list);
-
     e.target.reset();
   };
-
-  // const getIncompleteCount = () => {
-  //   return Additem.list.filter((item) => !item.complete).length;
-  // };
-
-  function deleteItem(id) {
-    Additem.updateList(Additem.list.filter((item) => item.id !== id));
-    // setList(items);
-    // Additem.updateList(updatedList);
-  }
-
-  function toggleComplete(id) {
-    const items = Additem?.list?.map((item) => {
-      if (item.id == id) {
-        item.completed == true;
-        deleteItem(item.id);
-        Additem.updatecompleted({
-          id: item.id,
-          addToDoItem: item.addToDoItem,
-          difficulty: item.difficulty,
-          assignedTo: item.assignedTo,
-        });
-        console.log("completet", Additem.completed);
-      }
-      return item;
-    });
-    Additem.updateList(items);
-  }
-
-  // useEffect(() => {
-  //   let incompleteCount = list.filter((item) => !item.complete).length;
-  //   setIncomplete(incompleteCount);
-  //   document.title = `To Do List: ${incomplete}`;
-  // }, [list]);
 
   return (
     <>
@@ -106,22 +70,8 @@ const ToDo = () => {
           <button type="submit">Add Item</button>
         </label>
       </form>
-      {Additem?.list?.map((item) =>
-        !item.completed ? ( // Check if the task is not completed
-          <div key={item.id}>
-            <p>{item?.addToDoItem}</p>
-            <p>
-              <small>Assigned to: {item?.assignedTo}</small>
-            </p>
-            <p>
-              <small>Difficulty: {item?.difficulty}</small>
-            </p>
-            <button onClick={() => toggleComplete(item.id)}>Completed</button>
-            <hr />
-          </div>
-        ) : null // Render null for completed tasks
-      )}
-    
+      
+    <Pagination/>
       <Footer />
     </>
   );
