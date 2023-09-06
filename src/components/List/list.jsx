@@ -11,15 +11,18 @@ const Pagination = () => {
   const myKey = "myList";
   const itemsPerPage = settings.numberOfItems; // Number of items to display per page
 
-  let displayedItems = Additem.list.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
-  if (settings.completed == true) {
-    displayedItems = Additem.list
-      .filter((item) => !item.completed)
-      .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-  }
+  // let displayedItems = Additem.list? Additem.list.slice(
+  //   (currentPage - 1) * itemsPerPage,
+  //   currentPage * itemsPerPage
+  // ):[];
+
+  // if (settings.completed == true) {
+  //   displayedItems = Additem.list
+  //     .filter((item) => !item.completed)
+  //     .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  // }
+
+  console.log(Additem.list)
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -29,28 +32,28 @@ const Pagination = () => {
     );
   };
 
-  // useEffect(() => {
-  //   const newItems = [];
-  //   const savedItems = localStorage.getItem(myKey);
-  //   const parsedItems = JSON.parse(savedItems);
-  //   for (let i = 0; i < parsedItems?.length; i++) {
-  //     newItems.push(parsedItems[i]);
-  //   }
-  //   console.log(newItems, "############");
-  //   // console.log(displayedItems,"/////////////")
+  useEffect(() => {
+    const newItems = [];
+    const savedItems = localStorage.getItem(myKey);
+    const parsedItems = JSON.parse(savedItems);
+    for (let i = 0; i < parsedItems?.length; i++) {
+      newItems.push(parsedItems[i]);
+    }
+    console.log(newItems, "############");
+    // console.log(displayedItems,"/////////////")
     
-  //   displayedItems = newItems?.slice(
-  //     (currentPage - 1) * itemsPerPage,
-  //     currentPage * itemsPerPage
-  //     );
-  //     Additem.updateList(displayedItems)
-  //   console.log(displayedItems, "************");
-  // }, []);
+    displayedItems = newItems?.slice(
+      (currentPage - 1) * itemsPerPage,
+      currentPage * itemsPerPage
+      );
+      Additem.updateList(displayedItems)
+    console.log(displayedItems, "************");
+  }, []);
 
-  // // Save the displayed items to local storage whenever they change
-  // useEffect(() => {
-  //   localStorage.setItem(myKey, JSON.stringify(displayedItems));
-  // }, [displayedItems]);
+  // Save the displayed items to local storage whenever they change
+  useEffect(() => {
+    localStorage.setItem(myKey, JSON.stringify(displayedItems));
+  }, [displayedItems]);
 
   return (
     <div>

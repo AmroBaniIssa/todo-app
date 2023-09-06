@@ -9,35 +9,26 @@ import Theme from "./Context/theme.jsx";
 import "@blueprintjs/core/lib/css/blueprint.css";
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 import "./App.css";
+import Header from "./components/Header/Header.jsx";
 
 class App extends Component {
-  // render() {
-  //   return (
-  //     <BrowserRouter>
-  //       {/* <Theme>
-  //         <Settings> */}
-  //           <Routes>
-  //             <Route path="/" element={<ToDo />} />
-  //             <Route path="/settings" element={<SettingPage />} />
-  //           </Routes>
-  //         {/* </Settings>
-  //       </Theme> */}
-  //     </BrowserRouter>
-  //   );
-  // }
+
   render() {
     return (
-      <>
+      <Settings>
         <Theme>
-          <Settings>
-            <AddList> 
-              <ToDo />
-            </AddList>
-          </Settings>
+          <BrowserRouter>
+            <Header />
+            <Routes>
+              <Route path="/" element={<ToDo />} />
+              <Route path="/settings" element={<SettingPage />} />
+            </Routes>
+          </BrowserRouter>
         </Theme>
-      </>
+      </Settings>
     );
   }
+
 }
 
 export default App;
