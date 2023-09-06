@@ -7,64 +7,50 @@ import { SettingsContext } from "../../Context/settings.jsx";
 const Pagination = () => {
   const Additem = useContext(AddToListContext);
   const settings = useContext(SettingsContext);
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const myKey = "myList";
   const itemsPerPage = settings.numberOfItems; // Number of items to display per page
 
-  const [currentPage, setCurrentPage] = useState(1);
-
-  // Sample list of items
-  // let itemList = Additem.list;
-  // console.log(settings.completed);
-  // if (settings.completed == false) {
-  //   const pending = itemList.filter((item) => !item.completed);
-  //   itemList = pending;
-  // } else {
-  //   itemList = Additem.list;
-  // }
-  // Calculate the index range for items to display on the current page
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-
-  // Slice the itemList based on the current page
-  let displayedItems =Additem.list.slice(startIndex, endIndex);
+  let displayedItems = Additem.list.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
   if (settings.completed == true) {
-      displayedItems = Additem.list.filter((item) => !item.completed).slice(startIndex, endIndex);
+    displayedItems = Additem.list
+      .filter((item) => !item.completed)
+      .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
   }
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
+    displayedItems = Additem.list.slice(
+      (newPage - 1) * itemsPerPage,
+      newPage * itemsPerPage
+    );
   };
 
-  // function deleteItem(id) {
-  //   return Additem.updateList(Additem.list.filter((item) => item.id !== id));
-   
-  // }
-
-  // function toggleComplete(id) {
-  //   const items = Additem.list.map((item) => {
-  //     if (item.id == id) {
-  //       item.completed = true;
-  //       deleteItem(item.id);
-  //       Additem.updatecompleted({
-  //         id: item.id,
-  //         addToDoItem: item.addToDoItem,
-  //         difficulty: item.difficulty,
-  //         assignedTo: item.assignedTo,
-  //       });
-  //     }
-  //     return item;
-  //   });
-  // }
-
   // useEffect(() => {
-  //   // Filter items into pending and completed arrays
-  //   const pending = itemList.filter((item) => !item.completed);
-  //   const completed = itemList.filter((item) => item.completed);
+  //   const newItems = [];
+  //   const savedItems = localStorage.getItem(myKey);
+  //   const parsedItems = JSON.parse(savedItems);
+  //   for (let i = 0; i < parsedItems?.length; i++) {
+  //     newItems.push(parsedItems[i]);
+  //   }
+  //   console.log(newItems, "############");
+  //   // console.log(displayedItems,"/////////////")
+    
+  //   displayedItems = newItems?.slice(
+  //     (currentPage - 1) * itemsPerPage,
+  //     currentPage * itemsPerPage
+  //     );
+  //     Additem.updateList(displayedItems)
+  //   console.log(displayedItems, "************");
+  // }, []);
 
-  //   setPendingItems(pending);
-  //   setCompletedItems(completed);
-  // }, [itemList]);
-
+  // // Save the displayed items to local storage whenever they change
+  // useEffect(() => {
+  //   localStorage.setItem(myKey, JSON.stringify(displayedItems));
+  // }, [displayedItems]);
 
   return (
     <div>
@@ -82,9 +68,12 @@ const Pagination = () => {
                 completed:{item.completed ? "done" : "pending"}
               </li>
               {/* <p>Card content</p> */}
-              <Button onClick={() => Additem.toggleComplete(item.id)}>completed</Button>
-              <Button onClick={() => Additem.deleteOneItem(item.id)}>delete</Button>
-
+              <Button onClick={() => Additem.toggleComplete(item.id)}>
+                completed
+              </Button>
+              <Button onClick={() => Additem.deleteOneItem(item.id)}>
+                delete
+              </Button>
             </Card>
           </>
         ))}
@@ -99,7 +88,9 @@ const Pagination = () => {
         <span>Page {currentPage}</span>
         <button
           onClick={() => handlePageChange(currentPage + 1)}
-          disabled={endIndex >= Additem.list.length}
+          disabled={
+            currentPage === Math.ceil(Additem.list.length / itemsPerPage)
+          }
         >
           Next Page
         </button>
