@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import ToDo from "./components/todo/todo.jsx";
 import SettingPage from "./components/SittingPage/SettingPage.jsx";
-import AddList from "./Context/addToList.jsx";
 import Settings from "./Context/settings.jsx";
 import Theme from "./Context/theme.jsx";
 import "@blueprintjs/core/lib/css/blueprint.css";

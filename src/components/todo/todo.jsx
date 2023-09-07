@@ -14,6 +14,7 @@ const ToDo = () => {
     difficulty: 4,
   });
   const [list, setList] = useState([]);
+  
   const [incomplete, setIncomplete] = useState([]);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
