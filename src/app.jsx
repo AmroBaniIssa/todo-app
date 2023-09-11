@@ -9,25 +9,48 @@ import "@blueprintjs/core/lib/css/blueprint.css";
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 import "./App.css";
 import Header from "./components/Header/Header.jsx";
+import Login from "./components/auth/login.jsx";
+import LoginProvider from "./components/auth/context.jsx";
+import Auth from "./components/auth/auth.jsx";
 
 class App extends Component {
-
   render() {
     return (
-      <Settings>
-        <Theme>
-          <BrowserRouter>
-            <Header />
-            <Routes>
-              <Route path="/" element={<ToDo />} />
-              <Route path="/settings" element={<SettingPage />} />
-            </Routes>
-          </BrowserRouter>
-        </Theme>
-      </Settings>
+      <LoginProvider>
+        <Login />
+        <Auth action="read">
+          <div>
+            <h2>list of items</h2>
+            <ul>
+              <li>item1</li>
+              <li>item2</li>
+              <li>item3</li>
+            </ul>
+          </div>
+        </Auth>
+        <Auth action="update">
+          <button>update</button>
+        </Auth>
+        <Auth action="create">
+          <button>create</button>
+        </Auth>
+        <Auth action="delete">
+          <button>delete</button>
+        </Auth>
+        <Settings>
+          <Theme>
+            <BrowserRouter>
+              <Header />
+              <Routes>
+                <Route path="/" element={<ToDo />} />
+                <Route path="/settings" element={<SettingPage />} />
+              </Routes>
+            </BrowserRouter>
+          </Theme>
+        </Settings>
+      </LoginProvider>
     );
   }
-
 }
 
 export default App;
